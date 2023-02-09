@@ -13,16 +13,18 @@ const InitialContacts = [
   { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
 ];
 
-export const App = () => {
-  const [contacts, setContacts] = useState(() => {
-    const savedContacts = localStorage.getItem('contacts');
+const getInitialContacts =() => {
+  const savedContacts = localStorage.getItem('contacts');
     if (savedContacts !== null) {
       const parsedContacts = JSON.parse(savedContacts);
       return parsedContacts;
     } else {
       return InitialContacts;
     }
-  });
+};
+
+export const App = () => {
+  const [contacts, setContacts] = useState(getInitialContacts);
   const [filter, setFilter] = useState('');
 
   const addContacts = ({ name, number }) => {
